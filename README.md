@@ -24,6 +24,13 @@ and then when prompted to reload, do so with
     vagrant reload --provision
 
 Both of these steps can take some time, upwards of ten minutes.
+If it fails to mount shared folder in Linux guest, destroy the vm:
+
+    vagrant destroy
+    
+then:
+    
+    vagrant plugin install vagrant-vbguest
 
 If you then want to run the monitoring application, SSH into the VM
 
