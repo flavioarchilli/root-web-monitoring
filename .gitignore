@@ -6,3 +6,5 @@ venv
 *.pyc
 # Vagrant
 .vagrant
+# Redis DB dump
+dump.rdb
