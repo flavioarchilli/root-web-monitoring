@@ -32,8 +32,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <!-- TODO how will this work generically? -->
-          {{ list_link_tag('examples', 'Examples') }}
+          {% block navtopbar %}{% endblock %}
         </ul>
       </div>
     </div>

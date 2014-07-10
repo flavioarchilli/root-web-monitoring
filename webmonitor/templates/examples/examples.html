@@ -1,4 +1,7 @@
 {% extends "layout.html" %}
+{% block navtopbar %}
+    {{ list_link_tag('examples', 'Examples') }}
+{% endblock %}
 {% block navsidebar %}
   {{ list_link_tag('examples/table', 'Table') }}
   {{ list_link_tag('examples/single_layout', 'Single layout') }}

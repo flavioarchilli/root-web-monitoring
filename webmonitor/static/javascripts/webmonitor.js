@@ -115,6 +115,14 @@ var WebMonitor = (function($, undefined) {
     drawHistogram(container, formattedData, options);
   };
 
+  // Display msg inside container, styled as a red error box
+  // Accepts:
+  //   container: jQuery element to insert msg into
+  //   msg: HTML message to display inside container
+  var displayFailure = function(container, msg) {
+    container.html('<div class="alert alert-danger">' + msg + '</div>');
+  };
+
   // Fetches and draws the named `histogram`, residing in `file`, in to the `container`.
   // Accepts:
   //   histogram: String of the histogram's full path key name with in the file
@@ -122,6 +130,11 @@ var WebMonitor = (function($, undefined) {
   //   container: jQuery element the histogram should be drawn in to. Any existing content will be replaced.
   var loadHistogramFromFileIntoContainer = function(histogram, file, container) {
     var url = '/files/' + file + '/' + histogram;
+    var failMsg = 'There was a problem retrieving histogram <code>'
+      + histogram
+      + '</code> from file <code>'
+      + file
+      + '</code>. Please contact the administrator.';
     // Submit a job to retrieve the histogram data
     $.getJSON(url, function(data, status, jqXHR) {
       if (status === 'success' && data['success'] === true) {
@@ -132,21 +145,12 @@ var WebMonitor = (function($, undefined) {
           if (result['data']['key_class'] !== 'TH1F') return;
           displayHistogram(result['data']['key_data'], container);
         }, function(result) {
-          log('Failed to load histogram');
-          log(result);
+          displayFailure(container, failMsg);
         });
+      } else {
+        displayFailure(container, failMsg);
       }
-    }).fail(function() {
-      container.html(''
-        + '<div class="alert alert-danger">'
-        + 'There was a problem retrieving histogram <code>'
-        + histogram
-        + '</code> from file <code>'
-        + file
-        + '</code>. Please contact the administrator.'
-        + '</div>'
-      );
-    });
+    }).fail(function() { displayFailure(container, failMsg); });
   };
 
   // Poll status of job, calling success or failure when finished.
@@ -169,7 +173,11 @@ var WebMonitor = (function($, undefined) {
               result = payload['result'];
           if (jobStatus === 'finished') {
             log('Job ' + jobID + ' finished');
-            success(result);
+            if (result['success'] === true) {
+              success(result);
+            } else {
+              failure(result);
+            }
           } else if (jobStatus === 'failed') {
             log('Job ' + jobID + ' failed');
             failure(result);
@@ -177,6 +185,8 @@ var WebMonitor = (function($, undefined) {
             log('Polling job ID ' + jobID + ': ' + jobStatus);
             poll(jobID, success, failure, timeout);
           }
+        } else {
+            failure(result);
         }
       });
     }, timeout);
