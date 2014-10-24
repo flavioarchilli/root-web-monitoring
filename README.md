@@ -1,5 +1,4 @@
-ROOT web monitoring
-===================
+# ROOT web monitoring [![Build status](https://travis-ci.org/alexpearce/root-web-monitoring.svg?branch=modularise)](http://travis-ci.org/alexpearce/root-web-monitoring)
 
 A [Flask](http://flask.pocoo.org/) web application to view [ROOT](http://root.cern.ch/) histograms.
 
@@ -46,7 +45,7 @@ When resuming development, you will need to activate the [virtualenv](http://www
 
 and then start the server
 
-    cd /vagrant/webmonitor
+    cd /vagrant
     honcho start
 
 Then [visit the site](http://localhost:5000/) on your development machine.

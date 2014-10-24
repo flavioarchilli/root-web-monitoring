@@ -8,3 +8,7 @@ venv
 .vagrant
 # Redis DB dump
 dump.rdb
+# Python eggs
+*.egg*
+# Tox
+.tox

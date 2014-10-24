@@ -14,8 +14,7 @@ source `which virtualenvwrapper.sh`
 
 echo "Setting up the WebMonitor virtualenv"
 mkvirtualenv webmonitor
-cd /vagrant/webmonitor
-pip install -r requirements.txt
+pip install -r /vagrant/requirements.txt
 echo "virtualenv setup complete!"
 echo "Now start the server with"
 echo "  honcho start"

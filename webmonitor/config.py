@@ -1,6 +1,8 @@
 """
 Configuration for the WebMonitor server.
 """
+import os
+
 # Application name, used in page titles etc.
 APP_NAME = 'Web Monitor'
 
@@ -8,8 +10,9 @@ APP_NAME = 'Web Monitor'
 DEBUG = False
 
 # Where static assets are stored (images, stylesheets, and JavaScripts)
-# TODO where is this relative to? what happens if the config file moves?
-ASSETS_DIRECTORY = './static'
+ASSETS_DIRECTORY = '{0}/static'.format(
+    os.path.dirname(os.path.abspath(__file__))
+)
 
 # Where ROOT files are stored
 FILES_DIRECTORY = '{0}/files'.format(ASSETS_DIRECTORY)

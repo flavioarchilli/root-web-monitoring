@@ -1,0 +1,4 @@
+include README.md
+include LICENSE
+recursive-include webmonitor/templates *
+recursive-include webmonitor/static *

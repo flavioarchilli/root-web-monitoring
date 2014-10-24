@@ -1,3 +1,15 @@
+{#
+  Main layout template for the application.
+  Defines the overall HTML framework, and includes WebMonitor stylesheets and javascripts.
+  Extending templates have access to the following blocks:
+
+  * `stylesheets` - Extra stylesheets <link> tags in the header, after all WebMonitor stylesheets
+  * `navbartop` - Top navigation bar
+  * `maincontent` - Main content body below the navigation bar
+  * `javascripts`  Extra javascripts just before the closing <body> tag, after all WebMonitor javascripts
+
+  They also have access to the helpers defined in _helpers.html, as this templates includes that file.
+#}
 {% from "_helpers.html" import stylesheet_tag, javascript_tag, list_link_tag %}
 <!doctype html>
 <html lang="en">
@@ -5,7 +17,7 @@
   <meta charset="utf-8">
 
   <title>{{ config['APP_NAME'] }}</title>
-  <meta name="description" content="A web app displaying information on the Vertex Location">
+  <meta name="description" content="{{ config['APP_DESCRIPTION'] }}">
   <!--
     Favicon from the Fugue set, released under Creative Commons Attribution 3.0 License.
     http://p.yusukekamiyamane.com/
@@ -14,9 +26,9 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {{ stylesheet_tag('//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css', False) }}
-  {{ stylesheet_tag('bootstrap-datepicker') }}
-  {{ stylesheet_tag('webmonitor') }}
+  {{ stylesheet_tag('lib/bootstrap.min', blueprint='catchall') }}
+  {{ stylesheet_tag('webmonitor', blueprint='catchall') }}
+  {% block stylesheets %}{% endblock %}
 </head>
 <body>
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -38,32 +50,22 @@
     </div>
   </div>
   <div class="container-fluid">
-    <div class="row">
-      <sidebar class="col-sm-3 col-md-2 sidebar">
-        <ul class="nav nav-sidebar">{% block navsidebar %}{% endblock %}</ul>
-      </sidebar>
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="main">
-      <h1 class="page-header">{% block pageheader %}{% endblock %}</h1>
-      {% block body %}{% endblock %}
-      </div>
-    </div>
+    {% block maincontainer %}{% endblock %}
   </div>
   <!-- jQuery for AJAX calls and DOM manipulation. -->
-  {{ javascript_tag('//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js', False) }}
+  {{ javascript_tag('lib/jquery.min', blueprint='catchall') }}
   <!-- Bootstrap.js for Bootstrap interactivity. -->
-  {{ javascript_tag('//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js', False) }}
-  <!-- Bootstrap datepicker for cool date inputs. -->
-  {{ javascript_tag('bootstrap-datepicker') }}
+  {{ javascript_tag('lib/bootstrap.min', blueprint='catchall') }}
   <!-- D3 for plotting -->
-  {{ javascript_tag('//cdnjs.cloudflare.com/ajax/libs/d3/3.4.6/d3.min.js', False) }}
+  {{ javascript_tag('lib/d3.min', blueprint='catchall') }}
   <!-- D3 charts for nice D3 charting -->
-  {{ javascript_tag('d3.chart.min') }}
+  {{ javascript_tag('lib/d3.chart.min', blueprint='catchall') }}
   <!-- Our own D3 chart definitions (https://github.com/alexpearce/histograms) -->
-  {{ javascript_tag('d3.chart.histograms.min') }}
+  {{ javascript_tag('lib/d3.chart.histograms.min', blueprint='catchall') }}
   <!-- Loading indicators with Spin.js -->
-  {{ javascript_tag('spin') }}
+  {{ javascript_tag('lib/spin.min', blueprint='catchall') }}
   <!-- App JS. -->
-  {{ javascript_tag('webmonitor') }}
+  {{ javascript_tag('webmonitor', blueprint='catchall') }}
   <script>
     // Strings referring to page-specific modules in the webmonitor.js module.
     // The active_page var is formatted as parent_name/child_name, but the WebMonitor
@@ -72,5 +74,6 @@
       return char.toUpperCase();
     });
   </script>
+  {% block javascripts %}{% endblock %}
 </body>
 </html>

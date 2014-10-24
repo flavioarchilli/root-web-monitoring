@@ -2,16 +2,16 @@
   Return a stylesheet link tag.
   If asset, construct URL as `static/stylesheets/name.css`, else assume URL is name.
 #}
-{% macro stylesheet_tag(name, asset=True) %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/{0}.css'.format(name)) if asset else name }}">
+{% macro stylesheet_tag(name, asset=True, blueprint='') %}
+  <link rel="stylesheet" href="{{ url_for('{0}.static'.format(blueprint), filename='stylesheets/{0}.css'.format(name)) if asset else name }}">
 {% endmacro %}
 
 {#
   Return a JavaScript link tag.
   If asset, construct URL as `static/javascripts/name.js`, else assume URL is name.
 #}
-{% macro javascript_tag(name, asset=True) %}
-  <script src="{{ url_for('static', filename='javascripts/{0}.js'.format(name)) if asset else name }}"></script>
+{% macro javascript_tag(name, asset=True, blueprint='') %}
+  <script src="{{ url_for('{0}.static'.format(blueprint), filename='javascripts/{0}.js'.format(name)) if asset else name }}"></script>
 {% endmacro %}
 
 {#
@@ -21,7 +21,7 @@
 #}
 {% macro list_link_tag(page, title) %}
   <li class="{{ 'active' if active_page_or_ancestor(page) else '' }}">
-    <a href="{{ url_for('serve_page', path=page) }}">{{ title }}</a>
+    <a href="{{ url_for('catchall.serve_page', path=page) }}">{{ title }}</a>
   </li>
 {% endmacro %}
 
@@ -35,6 +35,11 @@
     g.active_page = 'parent/child'
 #}
 {% macro active_page_or_ancestor(page) %}
+  {#- Strip off preceeding slash, if present
+     This is useful if the macro is used with url_for, which will insert
+     slashes at the beginning of the name
+  -#}
+  {%- if page.startswith('/') %}{% set page = page[1:] %}{% endif -%}
   {%- if page == g.active_page[0:page | length] -%}
     True
   {%- endif -%}

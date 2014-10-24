@@ -30,7 +30,7 @@ EOF
 source $HOME/.bash_profile
 
 echo "Setting up pip and virtualenv"
-curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py > $HOME/get-pip.py
+curl https://bootstrap.pypa.io/get-pip.py > $HOME/get-pip.py
 python $HOME/get-pip.py --user
 pip install --user virtualenv virtualenvwrapper
 rm -f $HOME/get-pip.py

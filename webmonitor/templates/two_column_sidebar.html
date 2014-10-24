@@ -1,0 +1,17 @@
+{#
+  Define a two column layout extending the main layout.
+  Sidebar on the left, main body on the right.
+  Templates extending this can fill in the sidebar with `sidebar`, and the main body with `body`.
+ #}
+{% extends "layout.html" %}
+{% block maincontainer %}
+<div class="row">
+  <sidebar class="col-sm-3 col-md-2 sidebar">
+    {% block sidebar %}{% endblock %}
+  </sidebar>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="main">
+  <h1 class="page-header">{% block pageheader %}{% endblock %}</h1>
+  {% block body %}{% endblock %}
+  </div>
+</div>
+{% endblock %}
