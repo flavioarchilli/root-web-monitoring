@@ -18,7 +18,7 @@
   {{ stylesheet_tag('lib/bootstrap-theme.min', blueprint='catchall') }}
   {{ stylesheet_tag('lib/style.min', blueprint='catchall') }}
   {{ stylesheet_tag('webmonitor', blueprint='catchall') }}
-  {{ stylesheet_tag('bootstrap-datepicker') }}
+  {{ stylesheet_tag('bootstrap-datepicker', blueprint='catchall') }}
 
 
   <!-- jQuery for AJAX calls and DOM manipulation. -->
@@ -36,10 +36,7 @@
   <!-- App JS. -->
   {{ javascript_tag('webmonitor', blueprint='catchall') }}
   <!--copying from the old-web-monitoring 0.011i TODO: add comments-->
-  {{ javascript_tag('lib/jquery-1.11.1', blueprint='catchall') }}
-  {{ javascript_tag('lib/jsTree/jstree_v3', blueprint='catchall') }}
-  {{ javascript_tag('lib/saveSvgAsPng', blueprint='catchall') }}
-  {{ javascript_tag('lib/bootstrap-datepicker') }}
+  {# {{ javascript_tag('lib/bootstrap-datepicker') }} #}
 
   <script>
     // Strings referring to page-specific modules in the webmonitor.js module.
