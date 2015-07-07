@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block htmlHeader %}
+{% endblock %}
+
+
+{% block pageheader %}Confirm Log out{% endblock %}
+{% block body %}
+<center>
+                Please confirm that you want to Log out 
+<br><br><br><br>
+<table border ="0" style="width:300px;table-layout:fixed" >
+<tr>
+<td align="center">
+
+                <form action="/logout" method="get">
+                <input type="submit" value="Confirm">
+                </form>                
+</td>
+<td align="center">
+                <form>
+                <input type="button" value="Back" onClick="history.go(-1);return true;">
+                </form>
+
+</td>
+</tr>
+</table>
+ </center>
+{% endblock %}
