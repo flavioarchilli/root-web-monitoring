@@ -7,7 +7,9 @@
 {% block pageheader %}Confirm Log out{% endblock %}
 {% block body %}
 <center>
-                Please confirm that you want to Log out 
+
+
+                You are currently logged in as {{ USERNAME }}. Please confirm that you want to Log out from the {{ PROJECTNAME }} project.  
 <br><br><br><br>
 <table border ="0" style="width:300px;table-layout:fixed" >
 <tr>
@@ -27,3 +29,16 @@
 </table>
  </center>
 {% endblock %}
+
+{% block logged %}
+{% endblock %}
+
+{% block toolbar %}
+    <div class="container-fluid">
+
+        <span class="navbar-left">
+              <p class="navbar-text"> {{ PROJECTNAME }} </p>
+        </span>
+     </div>
+{% endblock %}
+

@@ -34,11 +34,12 @@ def get_user_details(fields):
     ]
     return '<dl>{0}</dl>'.format(''.join(defs))
 
-def get_user_id():
+def get_info(info):
     if 'username' in session:
-        uid = session['uid']
-        return uid
+        our_var = session[info]
+        return our_var
     return "0"
+
 
 
 
