@@ -63,17 +63,31 @@ def logout():
              User = session['username']
              session.pop('username', None)
              return '''
+              <html>
+              <head>
+              <meta http-equiv="refresh" content="3;url=/" />
+               </head>
+             <body>
              <form action="/" method="get">
-               <H1> User logged out </H1>
+               <H1> User logged out. Redirecting to home page.  </H1>
                 <button type="submit">Continue</button><br>
              </form>
+              </body>
+              </html>
              '''
         else :
              return '''
+              <html>
+              <head>
+              <meta http-equiv="refresh" content="3;url=/" />
+               </head>
+             <body>
              <form action="/" method="get">
-               <H1> User was not logged in  </H1>
+               <H1> User was not logged in.  Redirecting to home page.  </H1>
                 <button type="submit">Continue</button><br>
              </form>
+              </body>
+              </html>
              '''
 
 @mod_auth.route('/login', methods=['GET', 'POST'])
