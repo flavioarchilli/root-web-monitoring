@@ -42,11 +42,8 @@ def default_child_path(path):
 @catchall.route('/', defaults={'path': ''})
 @catchall.route('/<path:path>')
 def serve_page(path):
-    # Find the default child page
     child_path = default_child_path(path)
-    # Expose the child path value
     g.active_page = child_path
-    # Try find a template called path.html, else 404
     try:
         return render_template('{0}.html'.format(child_path))
     except TemplateNotFound:

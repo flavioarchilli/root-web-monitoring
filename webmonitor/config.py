@@ -20,6 +20,6 @@ FILES_DIRECTORY = '{0}/files'.format(ASSETS_DIRECTORY)
 # Mappings of parent paths to their default children
 DEFAULT_CHILDREN = {
     '': 'examples',
-    'examples': 'examples/table',
-    'examples/tabs': 'examples/tabs/tab1'
+#    'examples': 'examples/table',
+#    'examples/tabs': 'examples/tabs/tab1'
 }
