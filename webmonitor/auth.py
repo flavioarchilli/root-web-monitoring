@@ -48,7 +48,10 @@ def check_user_account():
     if 'username' in session:
         User = session['username']
         print User, 'is logged in'
-        return "true"
+        if User != "": 
+           return "true"
+        else :
+           return "false"
     return "false"
 
 @mod_auth.route('/checklogger')
