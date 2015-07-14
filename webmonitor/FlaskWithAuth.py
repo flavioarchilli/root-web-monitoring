@@ -14,6 +14,7 @@ class FlaskWithAuth(FlaskWithJobResolvers):
         self.auth=False
         self.username = ""
         self.uid = ""
+        self.redirectroute = "/"
 
    def setauth(self, userisok):
          if isinstance(userisok, bool):
