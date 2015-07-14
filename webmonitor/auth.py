@@ -9,40 +9,24 @@ from flask import (
     request,
     escape,
     url_for,
-    flash
+    flash,
+    request
 )
 
 from flask_sso import SSO
 from datetime import datetime, timedelta
+from functools import wraps
 
 
 mod_auth  = Blueprint('mod_auth', __name__,
                      template_folder='templates', static_folder='static')
 
 
-def get_user_session_info(key):
-    return session['user'].get(
-        key,
-        'Key `{0}` not found in user session info'.format(key)
-    )
- 
- 
-def get_user_details(fields):
-    defs = [
-        '<dt>{0}</dt><dd>{1}</dd>'.format(f, get_user_session_info(f))
-        for f in fields
-    ]
-    return '<dl>{0}</dl>'.format(''.join(defs))
-
 def get_info(info):
     if 'username' in session:
         our_var = session[info]
         return our_var
     return "0"
-
-
-
-
 
 def check_user_account():
     if 'username' in session:
@@ -54,12 +38,6 @@ def check_user_account():
            return "false"
     return "false"
 
-@mod_auth.route('/checklogger')
-def auth_index():
-    if 'username' in session:
-        return 'Logged in as %s' % escape(session['username'])
-    return 'You are not logged in'
- 
 @mod_auth.route('/logout')
 def logout():
         if 'username' in session:
@@ -102,7 +80,7 @@ def login():
            current_app.setUserName(session['username'])
            current_app.setUID(session['uid'])
            current_app.auth = True
-           return redirect('/')
+           return redirect(current_app.redirectroute)
         return '''
         <form action="" method="post">
             <H1> Welcome to fake shibboleth</H1>
@@ -115,3 +93,19 @@ def login():
         </form>
     '''
  
+def requires_auth():
+    def wrapper(f):
+        @wraps(f)
+        def wrapped(*args, **kwargs):
+            if current_app.auth == False :
+                return error_response()
+            return f(*args, **kwargs)
+        return wrapped
+    return wrapper
+
+def error_response():
+      rule = request.url_rule
+      returnRoute = rule.rule
+      current_app.redirectroute = returnRoute
+      return redirect('/login')
+
