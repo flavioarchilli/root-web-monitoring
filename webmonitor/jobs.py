@@ -74,9 +74,11 @@ def create_job():
 def get_job(job_id):
     # Try to fetch the job, 404'ing if it's not found
     job = g.queue.fetch_job(job_id)
+
     if job is None:
         abort(404)
     return jsonify(dict(job=serialize_job(job)))
+
 
 
 @jobs.errorhandler(400)
