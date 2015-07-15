@@ -57,6 +57,17 @@
 </head>
 <body>
    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+       {% block namebar %}
+	<span class="navbar-left">
+	  <li class="dropdown">
+	    <a class="dropdown-toggle navbar-text"   data-toggle="dropdown" href="#">{{PROJECTNAME}}<b class="caret"></b></a>
+	    <ul class="dropdown-menu">
+		   <li><a href="/offline_bp">Offline</a></li>
+		   <li><a href="/online_dq_bp">Online</a></li>
+	    </ul>
+	  </li>
+	</span>
+       {% endblock %}
        {% block toolbar %}{% endblock %}
   </div>
       

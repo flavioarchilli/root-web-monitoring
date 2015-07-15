@@ -9,9 +9,6 @@ def create_app():
     app.secret_key = 'cH\xc5\xd9\xd2\xc4,^\x8c\x9f3S\x94Y\xe5\xc7!\x06>A'
 
 
-
-
-
     # Add jobs API and generic views
     from .catchall import catchall
     from .jobs import jobs
@@ -27,3 +24,5 @@ def create_app():
 
 def wsgi(*args, **kwargs):
     return create_app()(*args, **kwargs)
+
+
