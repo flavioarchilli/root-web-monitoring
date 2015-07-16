@@ -24,6 +24,4 @@ DEFAULT_CHILDREN = {
 #    'examples/tabs': 'examples/tabs/tab1'
 }
 
-# Mapping meaningful blueprints for dropdown menu
-CASES = []
 

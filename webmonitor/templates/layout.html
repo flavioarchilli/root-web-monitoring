@@ -61,9 +61,8 @@
 	<span class="navbar-left">
 	  <li class="dropdown">
 	    <a class="dropdown-toggle navbar-text"   data-toggle="dropdown" href="#">{{PROJECTNAME}}<b class="caret"></b></a>
-	    <ul class="dropdown-menu">
-		   <li><a href="/offline_bp">Offline</a></li>
-		   <li><a href="/online_dq_bp">Online</a></li>
+	    <ul class="dropdown-menu navbar-text">
+                   {{PROJECTFULLLIST|safe}}
 	    </ul>
 	  </li>
 	</span>
@@ -75,18 +74,8 @@
     <div class="row">
       <sidebar class="col-sm-3 col-md-2 sidebar">
         {% block logged %}
-        <table border ="0" style="table-layout:fixed" >
-             <tr>
-                <td width = 100px>
-                        Hello, {{ USERNAME }} 
-                </td>
-                <td>
-                      <form action="/ConfirmQuit" method="get">
-                      <input type="submit" value="Log OUT">
-                      </form> 
-                </td>
-              </tr>
-         </table>
+                      <span class="inline">Hello, {{ USERNAME }}</span>
+                      <a href="/ConfirmQuit" class="btn btn-default btn-xs " role="button">log out</a>
          {% endblock %}
 
         <!--<ul class="nav nav-sidebar">-->{% block navsidebar %}{% endblock %}<!--/ul>-->
