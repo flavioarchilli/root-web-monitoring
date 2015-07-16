@@ -49,7 +49,7 @@ class FlaskWithAuth(FlaskWithJobResolvers):
          cases = self.listed_blueprints
          string = ''
          for iSet in cases :
-                 string = string + '<td align=\"center\"><form action=\"/'+iSet[0]+'\" method=\"get\"><input type=\"submit\" value=\"'+iSet[1]+'\"></form></td>'
+                 string = string + '<a href=\"/'+iSet[0]+'\" class=\"btn btn-default\" role=\"button\">'+iSet[1]+'</a><br>'
 
          return string
 
