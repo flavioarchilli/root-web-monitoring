@@ -1240,7 +1240,6 @@
           .attr('fill', 'none')
           .attr('stroke', this.color);
         selection.attr('d', line);
-
         // Points
         var pointsJoin = g.selectAll('circle.point').data(this.data),
             pointsSelection = transition === true ? pointsJoin.transition().duration(250) : pointsJoin;
