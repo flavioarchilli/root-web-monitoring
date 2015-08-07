@@ -1,0 +1,3 @@
+rm -f d3.chart.histograms.* 
+wget http://www-pnp.physics.ox.ac.uk/~derkach/d3.chart.histograms.js
+wget http://www-pnp.physics.ox.ac.uk/~derkach/d3.chart.histograms.min.js
