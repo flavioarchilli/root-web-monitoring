@@ -11,26 +11,8 @@ class FlaskWithAuth(FlaskWithJobResolvers):
    """
    def __init__(self, *args, **kwargs):
         super(FlaskWithAuth, self).__init__(*args, **kwargs)
-        self.auth=False
-        self.username = ""
-        self.uid = ""
         self.redirectroute = "/"
         self.listed_blueprints = []
-
-   def setauth(self, userisok):
-         if isinstance(userisok, bool):
-             self.auth = userisok
-             if userisok == False:
-                 self.username = ""
-                 self.uid = ""
-         else :
-              raise WrongAuthInfo
-
-   def setUserName(self, uname):
-         self.username = uname
-
-   def setUID(self, uid):
-         self.uid = uid 
 
 
    def create_bplist(self):

@@ -28,6 +28,13 @@ def get_info(info):
         return our_var
     return "0"
 
+
+def get_uid():
+    if 'username' in session:
+        our_var = session['uid']
+        return our_var
+    return "0"
+
 def check_user_account():
     if 'username' in session:
         User = session['username']
@@ -97,7 +104,7 @@ def requires_auth():
     def wrapper(f):
         @wraps(f)
         def wrapped(*args, **kwargs):
-            if current_app.auth == False :
+            if check_user_account() == "false":
                 return error_response()
             return f(*args, **kwargs)
         return wrapped
