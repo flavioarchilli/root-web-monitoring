@@ -50,7 +50,6 @@ def logout():
         if 'username' in session:
              User = session['username']
              session.pop('username', None)
-             current_app.setauth(False)
              return '''
               <html>
               <head>
@@ -84,9 +83,6 @@ def login():
         if request.method == 'POST':
            session['username'] = request.form['username']
            session['uid'] = request.form['uid']
-           current_app.setUserName(session['username'])
-           current_app.setUID(session['uid'])
-           current_app.auth = True
            return redirect(current_app.redirectroute)
         return '''
         <form action="" method="post">
