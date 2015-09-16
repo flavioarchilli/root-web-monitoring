@@ -825,8 +825,12 @@
  * * `color`: The color of the text as a CSS-compatible string
  *            (default: '#000000')
  * * `x`: Initial position of the top-left corner of the box along x in px
- *        (default: 10)
+ *        (default: 0)
  * * `y`: Initial position of the top-left corner of the box along y in px
+ *        (default: 0)
+ * * `width`: Initial width of the box along x in px
+ *        (default: 10)
+ * * `height`: Initial height of the box along y in px
  *        (default: 10)
  */
 (function(d3, undefined) {
@@ -843,6 +847,12 @@
     }
     if (config.y === undefined) {
       config.y = 0;
+    }
+    if (config.width === undefined) {
+      config.width = 150;
+    }
+    if (config.height === undefined) {
+      config.height = data.length*20 + 10;
     }
     return {
       name: name,
@@ -862,8 +872,8 @@
         }
         g.classed('TextBox', true);
         // Create 'background' rectangle
-        var width = 150,
-            height = this.data.length*20 + 10;
+        var width = config.width,
+            height = config.height;
 
         //maximum width
         if (width>axes.width()) width = axes.width();
@@ -896,8 +906,10 @@
         join.selectAll('text').data(function(d) { return d; })
           .enter()
           .append('text')
-          // Align the key value to the left, value to right, padded by 5px
-          .attr('x', function(d, i) { return [5, width - 5][i]; })
+          .style("font-size", function(d) { return Math.min(width/(150),height/100) + "em" ; })
+
+          // Align the key value to the left, value to right, padded by width/30 px
+          .attr('x', function(d, i) { return [width/30, width - width/30][i]; })
           .attr('text-anchor', function(d, i) { return ['start', 'end'][i]; })
           .style('fill', config.color)
           .text(function(d) { return d; });
