@@ -80,10 +80,11 @@ def logout():
 
 @mod_auth.route('/login', methods=['GET', 'POST'])
 def login():
+        myRoute = current_app.redirectroute
         if request.method == 'POST':
            session['username'] = request.form['username']
            session['uid'] = request.form['uid']
-           return redirect(current_app.redirectroute)
+           return redirect(myRoute)
         return '''
         <form action="" method="post">
             <H1> Welcome to fake shibboleth</H1>
